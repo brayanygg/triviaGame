@@ -63,3 +63,11 @@ input:hover + label, input:checked + label {
   align-items: center;
   margin-bottom: 20px;
 }
+.heart {
+  font-size: 32px;
+}
+.score {
+  position: absolute;
+  right: 1%;
+  top: 1%;
+}
