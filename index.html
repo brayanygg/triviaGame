@@ -18,15 +18,21 @@
     <section class="started" id="section_started">
 
         <div class="score">
-            <p>Score: 0</p>
+            <p>Score: <span class="scoreBoard">0</span></p>
         </div>
+            <p><span class="heart">❤️</span> x<span class="amount">3</span></p>
     
         <div class="container" id="container">    
             
-
-            <p><span class="heart">❤️</span> x3</p>
         </div>
+    </section>
 
+    <section class="endGame">
+        <h2>Juego Terminado</h2>
+        <p>Puntaje: <span id="finalScore"></span></p>
+        <div class="selector">
+            <button id="backStart">Volver a inicio</button>
+        </div>
     </section>
 
     <script src="./main.js"></script>
