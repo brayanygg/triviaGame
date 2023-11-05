@@ -7,6 +7,8 @@ const CANTIDAD = document.querySelector(".amount")
 const ENDGAME = document.querySelector(".endGame")
 const TOSTART = document.getElementById("backStart")
 const FINALSCORE = document.getElementById("finalScore")
+const AUDIO = document.querySelector("audio")
+
 
 let questions = []
 let template = []
@@ -143,6 +145,8 @@ STARTBUTTON.addEventListener("click", ()=> {
     SCORES.innerHTML = score
     CANTIDAD.innerHTML = lives
 
+    AUDIO.play()
+    AUDIO.volume = 0.5
     start()
     MENU.style.display = "none"
     STARTED.style.display = "block"
@@ -150,6 +154,7 @@ STARTBUTTON.addEventListener("click", ()=> {
 
 TOSTART.addEventListener("click", ()=> {
 
+    AUDIO.pause()
     MENU.style.display = "block"
     STARTED.style.display = "none"
     ENDGAME.style.display = "none"

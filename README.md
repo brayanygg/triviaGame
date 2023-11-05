@@ -1,2 +1,3 @@
 # triviaGame
-a game for my college
+
+¡Juego trivia sobre inteligencia artificial!
