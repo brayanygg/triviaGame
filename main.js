@@ -1,25 +1,24 @@
-const menu = document.getElementById("menu_selector")
-const started = document.getElementById("section_started")
-const startButton = document.getElementById("start_button")
-const container = document.getElementById("container")
-const scores = document.querySelector(".scoreBoard")
-let cantidad = document.querySelector(".amount")
-const endGame = document.querySelector(".endGame")
-const toStart = document.getElementById("backStart")
-const puntajeFinal = document.getElementById("finalScore")
+const MENU = document.getElementById("menu_selector")
+const STARTED = document.getElementById("section_started")
+const STARTBUTTON = document.getElementById("start_button")
+const CONTAINER = document.getElementById("container")
+const SCORES = document.querySelector(".scoreBoard")
+const CANTIDAD = document.querySelector(".amount")
+const ENDGAME = document.querySelector(".endGame")
+const TOSTART = document.getElementById("backStart")
+const FINALSCORE = document.getElementById("finalScore")
 
 let questions = []
 let template = []
 let score;
 let lives;
 let pElements
-
 let counter;
 
 class Question {
     constructor(question, answers,trueAnswer, img) {
         this.question = question
-        this.answers = answers.sort((a,b) => Math.random() - 0.5)
+        this.answers = answers
         this.trueAnswer = trueAnswer
         this.img = img
     }
@@ -45,8 +44,7 @@ let question9 = new Question("¿Cuál es el nombre del sistema de gestión de ba
 
 let question10 = new Question("¿Cuál es el nombre del motor de búsqueda más utilizado en el mundo?", ["Google", "Bing", "Yahoo", "DuckDuckGo"],"Google", "./assets/motorB.png")
 
-
-
+//agrupacion de preguntas, aleatorizacion e inyeccion en el juego.
 function start() {
 
     counter = 0
@@ -58,6 +56,7 @@ function start() {
     questions.sort((a,b)=> Math.random() - 0.5)
 
     questions.forEach((Question) => {
+        Question.answers.sort((a,b) => Math.random() - 0.5)
         template.push(`
             <div class="imageContainer">
                 <img src=${Question.img} alt="un pc" width="300px" height="200px">
@@ -92,64 +91,66 @@ function start() {
 
     })
 
-    container.innerHTML = template[counter]
+    CONTAINER.innerHTML = template[counter]
 
     pElements = document.querySelectorAll('p');
-    iteracion();
+    check();
 }
 
-    function end() {
-        started.style.display = "none"
-        endGame.style.display = "block"
-        puntajeFinal.innerHTML = score
+function end() {
+    STARTED.style.display = "none"
+    ENDGAME.style.display = "block"
+    FINALSCORE.innerHTML = score
+}
+
+//escucha de elementos para determinar puntaje, vidas y procedimiento del juego
+function check() {
+
+    if(lives <= 0){
+        end()
     }
 
-    function iteracion() {
-        if(lives <= 0){
-            end()
-        }
-
-        pElements.forEach((pElement) => {
-            pElement.addEventListener('click', () => {
-                if(pElement.textContent == questions[counter].trueAnswer){
-                    score+=100;
-                    scores.innerHTML = score
-                }else{
-                    score-=50
-                    lives--
-                    scores.innerHTML = score
-                    cantidad.innerHTML = lives
-                }
+    pElements.forEach((pElement) => {
+        pElement.addEventListener('click', () => {
+            if(pElement.textContent == questions[counter].trueAnswer){
+                score+=100;
+                SCORES.innerHTML = score
+            }else{
+                score-=50
+                lives--
+                SCORES.innerHTML = score
+                CANTIDAD.innerHTML = lives
+            }
                 
-                if(counter +1 <= questions.length){
-                    counter++
-                    container.innerHTML = template[counter]
-                    pElements = document.querySelectorAll('p');
-                    iteracion();
-                }
-                if(counter == questions.length){
-                    end()
-                }
-            });
-          });
+            if(counter +1 <= questions.length){
+                counter++
+                CONTAINER.innerHTML = template[counter]
+                pElements = document.querySelectorAll('p');
+                check();
+            }
+            if(counter == questions.length){
+                end()
+            }
+        });
+    });
     
-    }
+}
 
-startButton.addEventListener("click", ()=> {
+STARTBUTTON.addEventListener("click", ()=> {
 
     score = 0
     lives = 3
-    scores.innerHTML = score
-    cantidad.innerHTML = lives
+    SCORES.innerHTML = score
+    CANTIDAD.innerHTML = lives
 
     start()
-    menu.style.display = "none"
-    started.style.display = "block"
+    MENU.style.display = "none"
+    STARTED.style.display = "block"
 })
 
-toStart.addEventListener("click", ()=> {
+TOSTART.addEventListener("click", ()=> {
 
-    menu.style.display = "block"
-    started.style.display = "none"
-    endGame.style.display = "none"
+    MENU.style.display = "block"
+    STARTED.style.display = "none"
+    ENDGAME.style.display = "none"
 })
