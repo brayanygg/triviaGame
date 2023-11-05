@@ -10,10 +10,11 @@ const puntajeFinal = document.getElementById("finalScore")
 
 let questions = []
 let template = []
-let score = 0;
-let lives = 3;
+let score;
+let lives;
+let pElements
 
-let counter = 0;
+let counter;
 
 class Question {
     constructor(question, answers,trueAnswer, img) {
@@ -44,49 +45,59 @@ let question9 = new Question("¿Cuál es el nombre del sistema de gestión de ba
 
 let question10 = new Question("¿Cuál es el nombre del motor de búsqueda más utilizado en el mundo?", ["Google", "Bing", "Yahoo", "DuckDuckGo"],"Google", "./assets/motorB.png")
 
-questions.push(question1,question2,question3,question4,question5,question6,question7,question8,question9,question10)
 
-questions.sort((a,b)=> Math.random() - 0.5)
 
-questions.forEach((Question) => {
-    template.push(`
-        <div class="imageContainer">
-            <img src=${Question.img} alt="un pc" width="300px" height="200px">
-        </div>
+function start() {
 
-        <div class="question">
-            <h2>${Question.question}</h2>
-        </div> 
+    counter = 0
+    questions = []
+    template = []
 
-        <div class="answers">
-            <input type="radio" name="pregunta" id="pregunta1">
-            <label for="pregunta1">
-                <p id="first">${Question.answers[0]}</p>
-            </label>
+    questions.push(question1,question2,question3,question4,question5,question6,question7,question8,question9,question10)
 
-            <input type="radio" name="pregunta" id="pregunta2">
-            <label for="pregunta2">
-                <p id="second">${Question.answers[1]}</p>
-            </label>
+    questions.sort((a,b)=> Math.random() - 0.5)
 
-            <input type="radio" name="pregunta" id="pregunta3">
-            <label for="pregunta3">
-                <p id="third">${Question.answers[2]}</p>
-            </label>
+    questions.forEach((Question) => {
+        template.push(`
+            <div class="imageContainer">
+                <img src=${Question.img} alt="un pc" width="300px" height="200px">
+            </div>
 
-            <input type="radio" name="pregunta" id="pregunta4">
-            <label for="pregunta4">
-                <p id="fourth">${Question.answers[3]}</p>
-            </label>
-        </div>
-    `)
+            <div class="question">
+                <h2>${Question.question}</h2>
+            </div> 
 
-})
+            <div class="answers">
+                <input type="radio" name="pregunta" id="pregunta1">
+                <label for="pregunta1">
+                    <p id="first">${Question.answers[0]}</p>
+                </label>
+
+                <input type="radio" name="pregunta" id="pregunta2">
+                <label for="pregunta2">
+                    <p id="second">${Question.answers[1]}</p>
+                </label>
+
+                <input type="radio" name="pregunta" id="pregunta3">
+                <label for="pregunta3">
+                    <p id="third">${Question.answers[2]}</p>
+                </label>
+
+                <input type="radio" name="pregunta" id="pregunta4">
+                <label for="pregunta4">
+                    <p id="fourth">${Question.answers[3]}</p>
+                </label>
+            </div>
+        `)
+
+    })
 
     container.innerHTML = template[counter]
 
-    let pElements = document.querySelectorAll('p');
+    pElements = document.querySelectorAll('p');
     iteracion();
+}
+
     function end() {
         started.style.display = "none"
         endGame.style.display = "block"
@@ -97,8 +108,9 @@ questions.forEach((Question) => {
         if(lives <= 0){
             end()
         }
+
         pElements.forEach((pElement) => {
-            pElement.addEventListener('click', (event) => {
+            pElement.addEventListener('click', () => {
                 if(pElement.textContent == questions[counter].trueAnswer){
                     score+=100;
                     scores.innerHTML = score
@@ -116,9 +128,7 @@ questions.forEach((Question) => {
                     iteracion();
                 }
                 if(counter == questions.length){
-                    started.style.display = "none"
-                    endGame.style.display = "block"
-                    puntajeFinal.innerHTML = score
+                    end()
                 }
             });
           });
@@ -127,10 +137,19 @@ questions.forEach((Question) => {
 
 startButton.addEventListener("click", ()=> {
 
+    score = 0
+    lives = 3
+    scores.innerHTML = score
+    cantidad.innerHTML = lives
+
+    start()
     menu.style.display = "none"
     started.style.display = "block"
 })
+
 toStart.addEventListener("click", ()=> {
 
-    location.reload()
+    menu.style.display = "block"
+    started.style.display = "none"
+    endGame.style.display = "none"
 })
