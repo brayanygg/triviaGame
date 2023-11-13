@@ -100,6 +100,7 @@ function start() {
 }
 
 function end() {
+    
     STARTED.style.display = "none"
     ENDGAME.style.display = "block"
     FINALSCORE.innerHTML = score
