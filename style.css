@@ -141,7 +141,7 @@ body {
 .endGame p {
   font-size: 28px;
   padding: 3px;
-  display: inline;
+  max-width: fit-content;
   border: 3px solid #fff;
   border-radius: 8px;
 }
