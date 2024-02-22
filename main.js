@@ -7,6 +7,7 @@ const CANTIDAD = document.querySelector(".amount")
 const ENDGAME = document.querySelector(".endGame")
 const TOSTART = document.getElementById("backStart")
 const FINALSCORE = document.getElementById("finalScore")
+const MAXSCORE = document.getElementById("maxScore")
 const AUDIO = document.querySelector("audio")
 
 
@@ -100,10 +101,19 @@ function start() {
 }
 
 function end() {
+
+    if(score > localStorage.getItem("max-score")) {
+        
+        localStorage.setItem("max-score", score)
+    }else if(localStorage.getItem("max-score") === null) {
+
+        localStorage.setItem("max-score", score)
+    }
     
     STARTED.style.display = "none"
     ENDGAME.style.display = "block"
     FINALSCORE.innerHTML = score
+    MAXSCORE.innerHTML = localStorage.getItem("max-score")
 }
 
 //escucha de elementos para determinar puntaje, vidas y procedimiento del juego
