@@ -4,6 +4,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    transition:all 250ms ease;
 }
 
 html {
@@ -144,5 +145,24 @@ body {
   max-width: fit-content;
   border: 3px solid #fff;
   border-radius: 8px;
+}
+
+.maxScoreArea {
+  margin-top: 4px;
+}
+
+.maxScoreArea p{
+  display: inline;
+}
+
+#scoreReset {
+  color: red;
+  font-size: 32px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+#scoreReset:hover {
+  color: white;
 }
 /* section started end */

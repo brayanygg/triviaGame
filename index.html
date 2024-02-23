@@ -9,11 +9,13 @@
 </head>
 <body>
     <audio src="./assets/quiz_background_music.mp3" loop></audio>
+    
     <section class="menu" id="menu_selector">
         <h1>TrivIA Game</h1>
         <div class="selector">
             <button id="start_button">¡Comenzar!</button>
         </div>
+
     </section>
 
     <section class="started" id="section_started">
@@ -31,7 +33,10 @@
     <section class="endGame">
         <h2>Juego Terminado</h2>
         <p>Puntaje: <span id="finalScore"></span></p>
-        <p>Mejor puntaje: <pan id="maxScore"></pan></p>
+        <div class="maxScoreArea">
+            <p>Mejor puntaje: <pan id="maxScore"></pan></p>
+            <span id="scoreReset">X</span>
+        </div>
         <div class="selector">
             <button id="backStart">Volver a inicio</button>
         </div>

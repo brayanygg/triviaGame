@@ -9,7 +9,7 @@ const TOSTART = document.getElementById("backStart")
 const FINALSCORE = document.getElementById("finalScore")
 const MAXSCORE = document.getElementById("maxScore")
 const AUDIO = document.querySelector("audio")
-
+const RESETMAXSCORE = document.getElementById("scoreReset")
 
 let questions = []
 let template = []
@@ -72,22 +72,22 @@ function start() {
             <div class="answers">
                 <input type="radio" name="pregunta" id="pregunta1">
                 <label for="pregunta1">
-                    <p id="first">${Question.answers[0]}</p>
+                    <p class="answer">${Question.answers[0]}</p>
                 </label>
 
                 <input type="radio" name="pregunta" id="pregunta2">
                 <label for="pregunta2">
-                    <p id="second">${Question.answers[1]}</p>
+                    <p class="answer">${Question.answers[1]}</p>
                 </label>
 
                 <input type="radio" name="pregunta" id="pregunta3">
                 <label for="pregunta3">
-                    <p id="third">${Question.answers[2]}</p>
+                    <p class="answer">${Question.answers[2]}</p>
                 </label>
 
                 <input type="radio" name="pregunta" id="pregunta4">
                 <label for="pregunta4">
-                    <p id="fourth">${Question.answers[3]}</p>
+                    <p class="answer">${Question.answers[3]}</p>
                 </label>
             </div>
         `)
@@ -96,7 +96,7 @@ function start() {
 
     CONTAINER.innerHTML = template[counter]
 
-    pElements = document.querySelectorAll('p');
+    pElements = document.querySelectorAll('p.answer');
     check();
 }
 
@@ -138,7 +138,7 @@ function check() {
             if(counter +1 <= questions.length){
                 counter++
                 CONTAINER.innerHTML = template[counter]
-                pElements = document.querySelectorAll('p');
+                pElements = document.querySelectorAll('p.answer');
                 check();
             }
             if(counter == questions.length){
@@ -161,6 +161,12 @@ STARTBUTTON.addEventListener("click", ()=> {
     start()
     MENU.style.display = "none"
     STARTED.style.display = "block"
+})
+
+RESETMAXSCORE.addEventListener("click", ()=> {
+    localStorage.removeItem("max-score")
+    alert("Se ha reiniciado el mejor puntaje.")
+    MAXSCORE.innerHTML = 0
 })
 
 TOSTART.addEventListener("click", ()=> {
